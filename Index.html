@@ -21,7 +21,7 @@ body {
     overflow-x: hidden;
 }
 
-.background {
+.bg {
     position: fixed;
     inset: -50%;
     z-index: -2;
@@ -30,21 +30,12 @@ body {
         cyan, blue, violet, magenta, red
     );
     filter: blur(100px);
-    opacity: 0.3;
-    animation: rotate 10s linear infinite;
+    opacity: 0.28;
+    animation: spin 12s linear infinite;
 }
 
-@keyframes rotate {
+@keyframes spin {
     to { transform: rotate(360deg); }
-}
-
-.container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 25px 15px;
 }
 
 .lights {
@@ -56,11 +47,11 @@ body {
 
 .light {
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: white;
-    box-shadow: 0 0 20px 5px #ff00ff;
+    box-shadow: 0 0 18px 5px #ff00ff;
     animation: blink 1s infinite alternate;
 }
 
@@ -72,74 +63,94 @@ body {
 .light:nth-child(6) { top: 60%; right: 5%; }
 
 @keyframes blink {
-    from { opacity: .3; transform: scale(.7); }
-    to { opacity: 1; transform: scale(1.5); }
+    to {
+        opacity: 0.35;
+        transform: scale(0.7);
+    }
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 16px;
 }
 
 .gift {
-    font-size: 110px;
-    animation: bounce 1.5s infinite;
-    filter: drop-shadow(0 0 25px #ff00ff);
+    font-size: 105px;
+    animation: bounce 1.4s infinite;
+    filter: drop-shadow(0 0 22px #ff00ff);
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-18px); }
 }
 
 h1 {
-    font-size: clamp(30px, 8vw, 55px);
-    margin: 12px 0;
-    text-shadow: 0 0 10px #ff00ff,
-                 0 0 25px #00eaff,
-                 0 0 40px #ff0080;
+    font-size: clamp(30px, 8vw, 56px);
+    margin: 10px 0;
+    text-shadow: 0 0 12px #ff00ff,
+                 0 0 28px #00eaff;
 }
 
 h2 {
     color: #ffb6e6;
-    margin: 15px 0;
+    margin: 14px 0;
+}
+
+p {
+    line-height: 1.6;
+    margin: 12px 0;
 }
 
 button {
-    margin-top: 25px;
-    padding: 15px 30px;
+    margin-top: 20px;
+    padding: 15px 28px;
     border: 2px solid white;
     border-radius: 40px;
     background: linear-gradient(
         90deg, #ff0080, #7928ca, #00c6ff
     );
     color: white;
-    font-size: 17px;
     font-weight: bold;
-    cursor: pointer;
+    font-size: 17px;
     box-shadow: 0 0 20px #ff00ff;
+    cursor: pointer;
 }
 
 #surprise {
     display: none;
     width: 100%;
     max-width: 650px;
-    animation: appear 1.5s ease;
+    animation: appear 1s ease;
 }
 
 @keyframes appear {
-    from { opacity: 0; transform: scale(.7); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .message {
-    margin-top: 25px;
-    padding: 25px 15px;
+    margin-top: 22px;
+    padding: 24px 14px;
     border: 2px solid #ff69dc;
     border-radius: 20px;
-    background: rgba(255,255,255,.08);
-    box-shadow: 0 0 25px #ff00ff;
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 24px #ff00ff;
     line-height: 2;
     font-size: 17px;
 }
 
 .credit {
-    margin-top: 25px;
+    margin-top: 24px;
     color: #ffd700;
     font-size: 18px;
     font-weight: bold;
@@ -151,6 +162,7 @@ button {
     font-size: 25px;
     pointer-events: none;
     animation: floatUp 6s linear forwards;
+    z-index: 5;
 }
 
 @keyframes floatUp {
@@ -164,7 +176,7 @@ button {
 
 <body>
 
-<div class="background"></div>
+<div class="bg"></div>
 
 <div class="lights">
     <div class="light"></div>
@@ -175,19 +187,23 @@ button {
     <div class="light"></div>
 </div>
 
-<div class="container">
+<main class="container">
 
-    <div id="intro">
+    <section id="intro">
+
         <div class="gift">🎁</div>
+
         <h2>A Special Surprise For You!</h2>
+
         <p>Your birthday surprise is waiting ❤️</p>
 
-        <button onclick="openGift()">
+        <button type="button" onclick="openGift()">
             OPEN YOUR GIFT 🎁
         </button>
-    </div>
 
-    <div id="surprise">
+    </section>
+
+    <section id="surprise">
 
         <h1>HAPPY BIRTHDAY</h1>
         <h1>PRINCESS</h1>
@@ -196,6 +212,7 @@ button {
         <h2>🎂✨ Special Birthday Celebration ✨🎂</h2>
 
         <div class="message">
+
             <h2>Dear Princess Ayesha Khan ❤️</h2>
 
             🌸 You Are Very Special 🌸<br>
@@ -206,46 +223,53 @@ button {
             🌈 May All Your Dreams Come True 🌈<br>
             🎁 Lots Of Love & Best Wishes 🎁<br>
             ❤️ STAY BLESSED FOREVER ❤️
+
         </div>
 
         <div class="credit">
             Made With ❤️ By Ali Nawaz 👑
         </div>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
 <script>
-let started = false;
+let celebrationStarted = false;
 
 function openGift() {
+
     document.getElementById("intro").style.display = "none";
+
     document.getElementById("surprise").style.display = "block";
 
-    if (!started) {
-        started = true;
+    if (!celebrationStarted) {
+        celebrationStarted = true;
         startCelebration();
     }
 }
 
 function startCelebration() {
+
     const emojis = [
         "❤️", "💖", "💕", "✨",
         "🌸", "🎉", "🎂", "⭐", "👑"
     ];
 
     setInterval(function() {
+
         const item = document.createElement("div");
 
         item.className = "floating";
+
         item.textContent = emojis[
             Math.floor(Math.random() * emojis.length)
         ];
 
         item.style.left = Math.random() * 100 + "vw";
+
         item.style.animationDuration =
-            (Math.random() * 3 + 4) + "s";
+            (4 + Math.random() * 3) + "s";
 
         document.body.appendChild(item);
 
